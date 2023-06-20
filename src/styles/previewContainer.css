@@ -15,17 +15,18 @@
 }
 
 .preview-container___versus-img {
-  width: 130px;
+  width: 50%;
+  object-fit: scale-down;
 }
 
 .preview-container___fight-btn {
-  padding: 8px 35px;
+  padding: 5% 20%;
   justify-self: right;
   text-align: center;
   background: #ba0303;
   margin: 40px 0;
   color: #f8f9f4;
-  font-size: 22px;
+  font-size: 1.5em;
   cursor: pointer;
   font-weight: bold;
   box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.75);

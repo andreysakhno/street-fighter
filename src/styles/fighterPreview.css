@@ -1,13 +1,92 @@
-.fighter-preview___root {
+.fighter-preview___root {  
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-basis: 250px;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
 }
 
-.fighter-preview___right {
-  align-items: flex-end;
+.fighter-preview___right {}
+
+.fighter-preview___left {}
+
+.fighter-preview___img {
+  height: 180px;
+  object-fit: scale-down;
+  margin-bottom: 15px;
 }
 
-.fighter-preview___left {
-  align-items: flex-start;
+.fighter-preview___right img {
+  transform: scaleX(-1);
 }
+
+.fighter-preview___info {
+  background: #ffdfa7;
+  padding: 15px;
+  border: 5px solid #ca9650;
+  border-radius: 20px;
+}
+
+.fighter-preview__name {
+  font-size: 0.9em;
+  color: #000;
+  margin: 0;
+  margin-bottom: 15px;
+}
+
+.fighter-preview__characteristics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.fighter-preview___characteristic {
+  padding: 2px 6px 3px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: last baseline;   
+  border-radius: 10px;
+  min-width: 45px;
+}
+
+.fighter-preview___characteristic:not(:last-child) {
+    margin-right: 7px;
+}
+
+.fighter-preview___characteristic:before {
+  font-family: 'Source Sans Pro', "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  padding: 0;
+  margin-right: 5px;
+}
+
+.health {  
+  background-color:  rgb(162, 21, 54);
+}
+
+.health::before {
+  content: '\2665';
+}
+
+.attack {
+  background-color: rgb(96, 53, 171);
+}
+
+.attack::before {
+  content: '\2660';
+}
+
+.defense {
+  background-color: rgb(21, 158, 90);
+}
+
+.defense::before {
+  content: '\2666';
+}
+

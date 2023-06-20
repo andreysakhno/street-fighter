@@ -10,25 +10,40 @@
 }
 
 .fighters___list {
-  margin: 40px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: center; 
+  overflow-x: auto;
+  white-space: nowrap;
+  height: 180px;  
 }
 
-.fighters___fighter {
-  height: 150px;
-  max-width: 150px;
-  flex: 1;
+.fighters___fighter { 
+  flex: 0 1 75px;
+  min-width: 75px;
   display: flex;
   justify-content: center;
+  align-items: center;    
   cursor: pointer;
   background: #ffdfa7;
+  padding: 5px;
   margin: 10px;
   border: 5px solid #ca9650;
+  transition: all .1s ease .1s;
 }
 
 .fighters___fighter:hover {
   background: #cbe4f8;
   border: 5px solid #267abf;
+}
+
+.fighter___fighter-image {
+  height: 110px;
+  object-fit: scale-down;
+}
+
+@media (max-width: 692px) {
+  .fighters___list {      
+      justify-content: left;
+    }
 }
