@@ -1,6 +1,5 @@
 import controls from '../../constants/controls';
-// eslint-disable-next-line import/no-cycle
-import Gong from './gong';
+import FightingFighter from './fightingFighter';
 
 /*
 function getRandomInteger(min, max) {
@@ -27,16 +26,96 @@ export function getDamage(attacker, defender) {
     return getHitPower(attacker) - getBlockPower(defender);
 }
 
+function doAttack(attacker, defender, criticalAtack = false) {
+    if (criticalAtack) {
+        attacker.doCriticalHit(defender);
+        return;
+    }
+
+    const damage = defender.isInBlock ? 0 : getDamage(attacker, defender);
+    attacker.doHit(defender, damage);
+}
+
+function isCriticalHitCombinationPressed(criticalHitCombination, pressedKeys) {
+    return criticalHitCombination.every(code => pressedKeys.has(code));
+}
+
+function handleKeyDown(event, firstFighter, secondFighter, pressedKeys) {
+    /*
+     * If the key is being held down such that it is automatically repeating
+     * or the pressed key is not control key leave the method
+     */
+    const controlKeys = Object.values(controls).flat();
+    if (event.repeat || !controlKeys.some(key => key === event.code)) {
+        return;
+    }
+
+    const key = event.code;
+
+    // For checking of multiple key presses add pressed key code to Set
+    pressedKeys.add(key);
+
+    // If the first fighter placed a block
+    if (key === controls.PlayerOneBlock) {
+        firstFighter.putBlock();
+    }
+    // If the second fighter placed a block
+    if (key === controls.PlayerTwoBlock) {
+        secondFighter.putBlock();
+    }
+    // If the first fighter simple hit
+    if (key === controls.PlayerOneAttack) {
+        doAttack(firstFighter, secondFighter);
+    }
+    // If the second fighter simple hit
+    if (key === controls.PlayerTwoAttack) {
+        doAttack(secondFighter, firstFighter);
+    }
+    // If the first fighter critical hit
+    const firstFighterCriticalHitCombination = controls.PlayerOneCriticalHitCombination;
+    if (isCriticalHitCombinationPressed(firstFighterCriticalHitCombination, pressedKeys)) {
+        doAttack(firstFighter, secondFighter, true);
+    }
+    // If the second fighter critical hit
+    const secondFighterCriticalHitCombination = controls.PlayerTwoCriticalHitCombination;
+    if (isCriticalHitCombinationPressed(secondFighterCriticalHitCombination, pressedKeys)) {
+        doAttack(secondFighter, firstFighter, true);
+    }
+}
+
+function handleKeyUp(event, firstFighter, secondFighter, pressedKeys) {
+    const key = event.code;
+
+    if (key === controls.PlayerOneBlock) {
+        firstFighter.removeBlock();
+    }
+    if (key === controls.PlayerTwoBlock) {
+        secondFighter.removeBlock();
+    }
+
+    pressedKeys.delete(key);
+}
+
 export async function fight(firstFighter, secondFighter) {
     return new Promise(resolve => {
-        // resolve the promise with the winner when fight is over
-        const gong = new Gong(firstFighter, secondFighter, controls);
-        gong.fight()
-            .then(winner => {
-                resolve(winner);
-            })
-            .catch(error => {
-                console.warn('Fighting error:', error);
-            });
+        const firstFightingFighter = new FightingFighter(firstFighter, 'left');
+        const secondFightingFighter = new FightingFighter(secondFighter, 'right');
+
+        const pressedKeys = new Set();
+
+        document.addEventListener('keydown', event => {
+            handleKeyDown(event, firstFightingFighter, secondFightingFighter, pressedKeys);
+
+            if (firstFightingFighter.currentHealth <= 0) {
+                resolve(secondFightingFighter);
+            }
+            if (secondFightingFighter.currentHealth <= 0) {
+                resolve(firstFightingFighter);
+            }
+        });
+
+        document.addEventListener('keyup', event => {
+            handleKeyUp(event, firstFightingFighter, secondFightingFighter, pressedKeys);
+        });
     });
 }

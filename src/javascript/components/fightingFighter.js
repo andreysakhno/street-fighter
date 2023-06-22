@@ -1,6 +1,6 @@
 import createElement from '../helpers/domHelper';
 
-class FighterOnStage {
+class FightingFighter {
     #criticalStrikeInterval = 10000; // 10 seconds in milliseconds
 
     #actionsStyles = {
@@ -148,4 +148,4 @@ class FighterOnStage {
     }
 }
 
-export default FighterOnStage;
+export default FightingFighter;

@@ -68,7 +68,11 @@ export default function renderArena(selectedFighters) {
     root.innerHTML = '';
     root.append(arena);
 
-    fight(...selectedFighters).then(winner => {
-        showWinnerModal(winner);
-    });
+    fight(...selectedFighters)
+        .then(winner => {
+            showWinnerModal(winner);
+        })
+        .catch(error => {
+            console.warn(error);
+        });
 }
