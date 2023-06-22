@@ -23,7 +23,8 @@ export function getBlockPower(fighter) {
 }
 
 export function getDamage(attacker, defender) {
-    return getHitPower(attacker) - getBlockPower(defender);
+    const damage = getHitPower(attacker) - getBlockPower(defender);
+    return damage > 0 ? damage : 0;
 }
 
 function doAttack(attacker, defender, criticalAtack = false) {
@@ -107,10 +108,10 @@ export async function fight(firstFighter, secondFighter) {
             handleKeyDown(event, firstFightingFighter, secondFightingFighter, pressedKeys);
 
             if (firstFightingFighter.currentHealth <= 0) {
-                resolve(secondFightingFighter);
+                resolve(secondFighter);
             }
             if (secondFightingFighter.currentHealth <= 0) {
-                resolve(firstFightingFighter);
+                resolve(firstFighter);
             }
         });
 
