@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-cycle
 import { getDamage } from './fight';
-import FighterOnStage from './figterOnStage';
+import FighterOnStage from './fighterOnStage';
 
 class Gong {
     #isFighting = false;
