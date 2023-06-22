@@ -1,5 +1,7 @@
 import showModal from './modal';
 
-export function showWinnerModal(fighter) {
-    // call showModal function
+export default function showWinnerModal(fighter) {
+    const { name: title, fighterElement } = fighter;
+    const bodyElement = fighterElement.cloneNode(true);
+    showModal({ title, bodyElement });
 }

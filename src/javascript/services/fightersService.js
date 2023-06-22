@@ -23,7 +23,7 @@ class FighterService {
     }
 
     /*
-     *  Eslint, вимагає використання this у методах класу, якщо вони є асинхронними. Expected 'this' to be used by class async method 'getFighterDeta
+     *  Eslint, вимагає використання this у методах класу. Expected 'this' to be used by class async method 'getFighterDeta'
      *  Тому замість, const endpoint = `details/fighter/${id}.json`; я додав setter та getter.
      *  Також можна було зробити цей метод статичним, або визначити метод callApi в цьому класі
      */

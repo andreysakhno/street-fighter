@@ -20,8 +20,59 @@
   transform: scaleX(-1);
 }
 
+.arena___fighter {
+  position: relative;
+}
+
 .arena___fighter img {
   height: 480px;
+}
+
+.arena___right-fighter.hit {  
+  transform: translateX(-100px);
+}
+
+.arena___left-fighter.hit {
+  transform: translateX(100px);
+}
+
+.arena___right-fighter.critical-hit {
+  transform: translateX(-300px);
+}
+
+.arena___left-fighter.critical-hit {
+  transform: translateX(300px);
+}
+
+.arena___right-fighter.block {
+  transform: translateX(50px);
+}
+
+.arena___left-fighter.block {
+  transform: translateX(-50px);
+}
+
+.arena___fighter::before {
+  font-weight: bold;
+  font-size: 2em;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: #ebd759;    
+  color: #000;
+  text-align: center;
+}
+
+.hit::before {
+  content: "Hit";
+}
+
+.critical-hit::before {
+  content: "Critical Hit";
+}
+
+.block::before {
+  content: "Block";
 }
 
 .arena___fight-status {
@@ -60,4 +111,19 @@
   height: 100%;
   width: 100%;
   background-color: #ebd759;
+}
+
+.arena___fighter-critical-hit-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  margin-top: 15px;    
+  padding: 5px;    
+  font-size: 1.5em;    
+  background-color: aquamarine;
+  border: 1px solid #000;
+  border-radius: 5px;
+    
 }
