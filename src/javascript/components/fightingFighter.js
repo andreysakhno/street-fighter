@@ -15,8 +15,8 @@ class FightingFighter {
         this.attack = fighter.attack;
         this.defense = fighter.defense;
 
-        this.currentHealth = this.health;
-        this.isInBlock = false;
+        this.initialHealth = this.health;
+        this.isBlock = false;
         this.criticalHitPossibility = true;
 
         this.fighterElement = document.querySelector(`.arena___${position}-fighter`);
@@ -44,14 +44,12 @@ class FightingFighter {
     //---------------------------------------------------------------------------------------------
 
     causeDamage(damage) {
-        if (damage > 0) {
-            this.currentHealth -= damage;
-            this.updateHealthBar();
-        }
+        this.health -= damage;
+        this.updateHealthBar();
     }
 
     updateHealthBar() {
-        const healthPercentage = Math.max(0, (this.currentHealth * 100) / this.health);
+        const healthPercentage = Math.max(0, (this.health * 100) / this.initialHealth);
         this.healthBarElement.style.width = `${healthPercentage}%`;
     }
 
@@ -59,13 +57,13 @@ class FightingFighter {
     // Block functionality
     //---------------------------------------------------------------------------------------------
     putBlock() {
-        this.isInBlock = true;
+        this.isBlock = true;
         // Add class .block to fighter element
         this.showAction(this.#actionsStyles.block);
     }
 
     removeBlock() {
-        this.isInBlock = false;
+        this.isBlock = false;
         // Remove class .block to fighter element
         this.hideAction(this.#actionsStyles.block);
     }
@@ -75,14 +73,13 @@ class FightingFighter {
     //---------------------------------------------------------------------------------------------
 
     doHit(opponent, damage) {
-        // You cann't hit if you are in a block
-        if (this.isInBlock) return;
-
         // Add class .hit to fighter element
         this.showAction(this.#actionsStyles.hit);
 
         // Sametimes the block power is higher than the hit power, therefore the damage is negative
-        opponent.causeDamage(damage);
+        if (!opponent.isBlock) {
+            opponent.causeDamage(damage);
+        }
 
         setTimeout(() => {
             this.hideAction(this.#actionsStyles.hit);
@@ -93,9 +90,9 @@ class FightingFighter {
     // Critical hit functionality
     //---------------------------------------------------------------------------------------------
 
-    doCriticalHit(opponent) {
+    doCriticalAttack(opponent) {
         // You cann't do critical hit if you are in a block or until the critical hit possibility is restored
-        if (this.isInBlock || !this.criticalHitPossibility) {
+        if (this.isBlock || !this.criticalHitPossibility) {
             return;
         }
 
