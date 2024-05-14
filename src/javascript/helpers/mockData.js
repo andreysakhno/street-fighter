@@ -27,7 +27,7 @@ export const fighters = [
     {
         _id: '6',
         name: 'Bison',
-        source: 'http://www.fightersgeneration.com/np5/char/ssf2hd/bison-hdstance.gif'
+        source: 'https://www.fightersgeneration.com/np5/char/ssf2hd/bison-hdstance.gif'
     }
 ];
 
@@ -78,6 +78,6 @@ export const fightersDetails = [
         health: 45,
         attack: 5,
         defense: 4,
-        source: 'http://www.fightersgeneration.com/np5/char/ssf2hd/bison-hdstance.gif'
+        source: 'https://www.fightersgeneration.com/np5/char/ssf2hd/bison-hdstance.gif'
     }
 ];
