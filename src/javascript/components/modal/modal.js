@@ -3,6 +3,7 @@ import createElement from '../../helpers/domHelper';
 function getModalContainer() {
     return document.getElementById('root');
 }
+
 function hideModal() {
     const modal = document.getElementsByClassName('modal-layer')[0];
     modal?.remove();

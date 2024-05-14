@@ -1,7 +1,7 @@
 import createElement from '../helpers/domHelper';
 
 class FightingFighter {
-    #criticalStrikeInterval = 10000; // 10 seconds in milliseconds
+    #criticalStrikeInterval = 10_000;
 
     #actionsStyles = {
         hit: 'hit',
@@ -26,10 +26,6 @@ class FightingFighter {
         this.createCriticalHitBoardElement(position);
     }
 
-    //---------------------------------------------------------------------------------------------
-    // Initial rendering
-    //---------------------------------------------------------------------------------------------
-
     createCriticalHitBoardElement() {
         this.criticalHitBoardElement = createElement({
             tagName: 'div',
@@ -38,10 +34,6 @@ class FightingFighter {
         this.criticalHitBoardElement.textContent = '⚡';
         this.healthBarElement.closest('.arena___health-indicator').after(this.criticalHitBoardElement);
     }
-
-    //---------------------------------------------------------------------------------------------
-    // Damage
-    //---------------------------------------------------------------------------------------------
 
     causeDamage(damage) {
         this.health -= damage;
@@ -53,30 +45,18 @@ class FightingFighter {
         this.healthBarElement.style.width = `${healthPercentage}%`;
     }
 
-    //---------------------------------------------------------------------------------------------
-    // Block functionality
-    //---------------------------------------------------------------------------------------------
     putBlock() {
         this.isBlock = true;
-        // Add class .block to fighter element
         this.showAction(this.#actionsStyles.block);
     }
 
     removeBlock() {
         this.isBlock = false;
-        // Remove class .block to fighter element
         this.hideAction(this.#actionsStyles.block);
     }
 
-    //---------------------------------------------------------------------------------------------
-    // Simple hit functionality
-    //---------------------------------------------------------------------------------------------
-
     doHit(opponent, damage) {
-        // Add class .hit to fighter element
         this.showAction(this.#actionsStyles.hit);
-
-        // Sametimes the block power is higher than the hit power, therefore the damage is negative
         if (!opponent.isBlock) {
             opponent.causeDamage(damage);
         }
@@ -86,12 +66,7 @@ class FightingFighter {
         }, 300);
     }
 
-    //---------------------------------------------------------------------------------------------
-    // Critical hit functionality
-    //---------------------------------------------------------------------------------------------
-
     doCriticalAttack(opponent) {
-        // You cann't do critical hit if you are in a block or until the critical hit possibility is restored
         if (this.isBlock || !this.criticalHitPossibility) {
             return;
         }
@@ -101,7 +76,6 @@ class FightingFighter {
         const damage = 2 * this.attack;
         opponent.causeDamage(damage);
 
-        // Disable critical hit for 10 seconds
         this.disableCriticalHit();
 
         setTimeout(() => {
@@ -129,7 +103,6 @@ class FightingFighter {
         go();
     }
 
-    // Actions
     showAction(action) {
         this.fighterElement.classList.add(action);
     }
