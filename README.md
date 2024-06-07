@@ -2,6 +2,8 @@
 
 "Street Fight" - a game in which the player chooses two fighters, who in turn fight, slapping each other with their hands, feet, and head. Whoever runs out of lives first - loses.
 
+- [DEMO](https://andreysakhno.github.io/street-fighter/)
+
 ## GAME CONTROLS:
 
 -   **Player 1 (left)**
