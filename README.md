@@ -1,6 +1,6 @@
-# STREET FIGHT - A GAME, DEVELOPED IN JAVASCRIPT
+# STREET FIGHTER - A GAME, DEVELOPED IN JAVASCRIPT
 
-"Street Fight" - a game in which the player chooses two fighters, who in turn fight, slapping each other with their hands, feet, and head. Whoever runs out of lives first - loses.
+"Street Fighter" - a fighting game where players battle each other using unique characters and moves. Whoever runs out of lives first - loses.
 
 - [DEMO](https://andreysakhno.github.io/street-fighter/)
 
